@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Sửa Thông Tin Anime</title>
+    <!-- <link rel="stylesheet" href="/css/edit_a.css" /> -->
+    <style>
+    body {
+      background-color: #0d1117;
+      color: #ffffff;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #facc15;
+    }
+
+    form {
+      max-width: 600px;
+      margin-top: 20px;
+      background: #161b22;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: none;
+      background: #0d1117;
+      color: white;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #facc15;
+      border: none;
+      border-radius: 8px;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .message {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    .message.success {
+      color: #4ade80;
+    }
+
+    .message.error {
+      color: #f87171;
+    }
+  </style>
+</head>
+<body>
+  <h1>Sửa Thông Tin Anime</h1>
+  <form id="editForm">
+    <input type="hidden" id="anime_id" />
+
+    <label>Tiêu đề</label>
+    <input type="text" id="tieu_de" required />
+
+    <label>Ảnh bìa</label>
+    <input type="text" id="anh_bia" />
+
+    <label>Studio</label>
+    <input type="text" id="studio" />
+
+    <label>Số tập</label>
+    <input type="number" id="so_tap" />
+
+    <label>Trạng thái</label>
+    <input type="text" id="trang_thai" />
+
+    <label>Thể loại</label>
+    <input type="text" id="the_loai" />
+
+    <label>Tóm tắt</label>
+    <textarea id="tom_tat" rows="5"></textarea>
+
+    <button type="submit">Lưu thay đổi</button>
+  </form>
+
+  <p id="status"></p>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+
+    fetch(`/api/anime/get_anime.php?id=${id}`)
+      .then(res => res.json())
+      .then(anime => {
+        document.getElementById('anime_id').value = anime.id;
+        document.getElementById('tieu_de').value = anime.tieu_de;
+        document.getElementById('anh_bia').value = anime.anh_bia;
+        document.getElementById('studio').value = anime.studio;
+        document.getElementById('so_tap').value = anime.so_tap;
+        document.getElementById('trang_thai').value = anime.trang_thai;
+        document.getElementById('the_loai').value = anime.the_loai;
+        document.getElementById('tom_tat').value = anime.tom_tat;
+      });
+
+    document.getElementById('editForm').addEventListener('submit', e => {
+      e.preventDefault();
+
+      const data = {
+        id: id,
+        tieu_de: document.getElementById('tieu_de').value,
+        anh_bia: document.getElementById('anh_bia').value,
+        studio: document.getElementById('studio').value,
+        so_tap: document.getElementById('so_tap').value,
+        trang_thai: document.getElementById('trang_thai').value,
+        the_loai: document.getElementById('the_loai').value,
+        tom_tat: document.getElementById('tom_tat').value,
+      };
+
+      fetch('/api/anime/update_a.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+        .then(res => res.json())
+        .then(res => {
+          document.getElementById('status').textContent = res.message;
+        })
+        .catch(err => {
+          document.getElementById('status').textContent = 'Lỗi: ' + err.message;
+        });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Danh sách Anime</title>
+  <link rel="stylesheet" href="/css/index.css" />
+</head>
+<body>
+  <header>
+    <div class="left">
+      <div class="logo">ANIME.VN</div>
+    </div>
+
+
+  <nav class="navbar">
+
+    <ul class="nav-menu">
+      <li><a href="#">New</a></li>
+      <li><a href="#">Phổ Biến</a></li>
+      <li><a href="#">Năm Phát Hành</a></li>
+
+      <li class="dropdown">
+        <a href="#">Thể loại</a>
+        <div class="dropdown-menu">
+          <div class="dropdown-left">
+            <a href="#">Browse All (A-Z)</a>
+            <a href="#">Music Videos & Concerts</a>
+          </div>
+          <div class="dropdown-right">
+            <div class="genre-column">
+              <a href="#">Action</a>
+              <a href="#">Adventure</a>
+              <a href="#">Comedy</a>
+              <a href="#">Drama</a>
+              <a href="#">Fantasy</a>
+            </div>
+            <div class="genre-column">
+              <a href="#">Music</a>
+              <a href="#">Romance</a>
+              <a href="#">Sci-Fi</a>
+              <a href="#">Seinen</a>
+              <a href="#">Shojo</a>
+            </div>
+            <div class="genre-column">
+              <a href="#">Shonen</a>
+              <a href="#">Slice of life</a>
+              <a href="#">Sports</a>
+              <a href="#">Supernatural</a>
+              <a href="#">Thriller</a>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li><a href="#">News</a></li>
+    </ul>
+  </nav>
+    <!-- CHỈ có ô tìm kiếm ở trên header -->
+    <div class="center">
+      <form id="searchForm" style="display: flex; gap: 10px;">
+        <input type="text" id="search" name="search" placeholder="Tìm kiếm anime..." class="search-input" />
+      </form>
+    </div>
+
+    <button id="adminPanelBtn" style="display: none;">Quản trị web</button>
+
+
+    <div class="right">
+      
+  <button id="loginBtn">Đăng nhập</button>
+  <div id="userAvatar">
+    <img src="/images/default-avatar.png" alt="Avatar">
+    <span id="usernameDisplay">Tên User</span>
+  </div>
+  
+</div>
+
+  </header>
+
+  <!-- Modal đăng nhập -->
+  <div id="loginModal">
+    <div class="modal-content">
+      <button class="close-btn" id="closeLogin">&times;</button>
+      <h2>Đăng nhập</h2>
+      <form id="loginForm">
+        <label for="username">Tên đăng nhập</label>
+        <input type="text" id="username" name="username" required />
+        <label for="password">Mật khẩu</label>
+        <input type="password" id="password" name="password" required />
+        <button type="submit" class="submit-btn">Đăng Nhập</button>
+        <p id="loginError" style="color: red; margin-top: 10px;"></p>
+      </form>
+      <p>Chưa có tài khoản? <a href="#" id="goToRegister">Đăng ký</a></p>
+    </div>
+  </div>
+
+  <!-- Modal đăng ký -->
+  <div id="registerModal" style="display: none;">
+    <div class="modal-content">
+      <button class="close-btn" id="closeRegister">&times;</button>
+      <h2>Đăng ký</h2>
+          <form id="registerForm">
+      <label for="reg_username">Tên đăng nhập</label>
+      <input type="text" id="reg_username" name="username" required />
+      
+      <label for="reg_Email">Email</label>
+      <input type="text" id="reg_Email" name="email" required />
+      
+      <label for="reg_password">Mật khẩu</label>
+      <input type="password" id="reg_password" name="password" required />
+      
+      <label for="reg_password1">Nhập lại mật khẩu</label>
+      <input type="password" id="reg_password1" name="password1" required />
+      
+      <button type="submit" class="submit-btn">Đăng Ký</button>
+      <p id="registerError" style="color:red; margin-top:10px;"></p>
+    </form>
+
+      <p>Đã có tài khoản? <a href="#" id="goToLogin">Đăng nhập</a></p>
+    </div>
+  </div>
+
+  <!-- Danh sách anime -->
+  <div id="anime-container" class="anime-grid"></div>
+
+  <!-- Phân trang -->
+  <div id="pagination"></div>
+
+  <script src="/js/index.js"></script>
+</body>
+</html>

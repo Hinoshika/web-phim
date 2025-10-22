@@ -1,0 +1,514 @@
+/* ==== Cấu hình cơ bản ==== */
+body {
+  background-color: #0d1117;
+  color: white;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding-top: 70px; /* tránh bị che bởi header cố định */
+}
+
+/* ==== Header cố định ==== */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #161b22;
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+header .left,
+header .center,
+header .right {
+  display: flex;
+  align-items: center;
+}
+
+header .left {
+  flex: 1;
+}
+
+header .center {
+  flex: 2;
+  justify-content: center;
+}
+
+header .right {
+  flex: 1;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #facc15;
+  font-family: 'Arial', sans-serif;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+
+#loginBtn {
+  padding: 8px 15px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #facc15;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  color: black;
+  transition: background-color 0.3s ease;
+}
+
+#loginBtn:hover {
+  background-color: #e6b70c;
+}
+
+#userAvatar {
+  display: none;
+  position: fixed;
+  top: 20px;
+  right: 50px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  z-index: 100;
+}
+#userAvatar img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+#userAvatar span {
+  color: white;
+  font-weight: bold;
+}
+
+/* ==== Danh sách Anime ==== */
+.anime-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.anime-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  background: #161b22;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.anime-card:hover {
+  transform: translateY(-5px);
+}
+
+.anime-card img {
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+  display: block;
+  object-fit: cover;
+  height: 280px;
+}
+
+.hover-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(13, 17, 23, 0.95);
+  padding: 10px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  font-size: 0.8rem;
+  max-height: 150px;
+  overflow-y: auto;
+  color: #eee;
+}
+
+.anime-card:hover .hover-info {
+  transform: translateY(0%);
+}
+
+.tag {
+  background-color: #facc15;
+  color: black;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  margin-right: 4px;
+  display: inline-block;
+  margin-bottom: 4px;
+}
+
+.title {
+  margin-top: 8px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 5px 10px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: white;
+}
+
+/* ==== Form lọc Anime ==== */
+.filter-form {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.filter-form select,
+.filter-form button,
+.filter-form input {
+  padding: 6px 12px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  margin-right: 10px;
+}
+
+/* ==== Modal Đăng Nhập ==== */
+#loginModal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+#loginModal .modal-content {
+  background: #161b22;
+  padding: 20px;
+  border-radius: 8px;
+  width: 320px;
+  color: white;
+  position: relative;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+#loginModal .modal-content h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+#loginModal label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+#loginModal input[type="text"],
+#loginModal input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+}
+
+#loginModal button.close-btn {
+  position: absolute;
+  top: 10px; right: 12px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.4rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#loginModal button.submit-btn {
+  width: 100%;
+  padding: 10px;
+  background: #facc15;
+  border: none;
+  color: black;
+  font-weight: 700;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+}
+
+#loginModal button.submit-btn:hover {
+  background-color: #e6b70c;
+}
+
+/* ==== Modal Đăng Ký ==== */
+#registerModal {
+  display: none;
+  position: fixed;
+  z-index: 1001;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+  align-items: center;
+  justify-content: center;
+}
+
+#registerModal .modal-content {
+  background-color: #1c1c1e;
+  color: white;
+  padding: 30px 25px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  position: relative;
+  animation: slideIn 0.3s ease;
+}
+
+#registerModal .close-btn {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #ccc;
+  cursor: pointer;
+}
+
+#registerModal .close-btn:hover {
+  color: #fff;
+}
+
+#registerModal h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#registerModal form {
+  display: flex;
+  flex-direction: column;
+}
+
+#registerModal label {
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #ddd;
+}
+
+#registerModal input {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #444;
+  border-radius: 6px;
+  background-color: #2c2c2e;
+  color: white;
+  font-size: 14px;
+}
+
+#registerModal .submit-btn {
+  background-color: #28a745;
+  border: none;
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#registerModal .submit-btn:hover {
+  background-color: #218838;
+}
+
+#registerModal .switch-link {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 14px;
+}
+
+#registerModal .switch-link a {
+  color: #00aaff;
+  text-decoration: none;
+}
+
+#registerModal .switch-link a:hover {
+  text-decoration: underline;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==== Phân trang ==== */
+#pagination {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.page-btn {
+  margin: 4px;
+  padding: 8px 12px;
+  background: #1f2937;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.page-btn.active,
+.page-btn:hover {
+  background-color: #facc15;
+  color: black;
+}
+ * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1a1a1a;
+      color: white;
+    }
+
+    .navbar {
+      background-color: #141519;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      margin-right: 30px;
+      color: #f47521;
+    }
+
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-menu li {
+      position: relative;
+    }
+
+    .nav-menu a {
+      text-decoration: none;
+      color: white;
+      padding: 8px 12px;
+      display: block;
+      transition: background-color 0.3s;
+    }
+
+    .nav-menu a:hover {
+      background-color: #2d2d2d;
+      border-radius: 5px;
+    }
+
+    /* Dropdown */
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 38px;
+      left: 0;
+      background-color: #141519;
+      border: 1px solid #333;
+      padding: 20px;
+      width: 650px;
+      color: white;
+      z-index: 999;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      display: flex;
+      gap: 40px;
+    }
+
+
+    .dropdown-left {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 180px;
+      border-right: 1px solid #444;
+      padding-right: 20px;
+    }
+
+    .dropdown-right {
+      display: flex;
+      gap: 30px;
+    }
+
+    .genre-column {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .dropdown-menu a {
+      color: white;
+      font-size: 14px;
+      transition: color 0.3s;
+    }
+
+    .dropdown-menu a:hover {
+      color: #f47521;
+    }
+
+    #adminPanelBtn {
+  padding: 8px 15px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #2563eb; /* xanh dương */
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+#adminPanelBtn:hover {
+  background-color: #1d4ed8;
+}
+
+#userAvatar {
+  display: flex; /* đã có */
+  align-items: center;
+  gap: 8px;
+  position: fixed;
+  top: 20px;
+  right: 50px;
+  z-index: 100;
+}
+

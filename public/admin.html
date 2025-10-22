@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Quản trị Anime</title>
+  <style>
+    body {
+      background-color: #0d1117;
+      color: #ffffff;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #facc15;
+      font-size: 2rem;
+      display: inline-block;
+    }
+
+    .add-btn {
+      background-color: #22c55e;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      margin-left: 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .anime-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .anime-card {
+      background-color: #161b22;
+      padding: 12px;
+      border-radius: 10px;
+      box-shadow: 0 0 6px rgba(255, 255, 255, 0.05);
+      transition: transform 0.2s;
+      text-align: center;
+      position: relative;
+    }
+
+    .anime-card:hover {
+      transform: scale(1.03);
+    }
+
+    .anime-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .anime-card h3 {
+      margin: 10px 0 6px;
+      font-size: 1.1rem;
+      color: #facc15;
+    }
+
+    .anime-card p {
+      font-size: 0.9rem;
+      color: #ccc;
+      margin: 3px 0;
+    }
+
+    .error-message {
+      margin-top: 30px;
+      color: #f87171;
+      font-weight: bold;
+    }
+
+    .card-actions {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .anime-card:hover .card-actions {
+      display: flex;
+    }
+
+    .card-actions button {
+      background-color: #3b82f6;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    .card-actions button.delete {
+      background-color: #ef4444;
+    }
+  </style>
+</head>
+<body>
+  <h1>Quản Lý Phim</h1>
+  <button class="add-btn" onclick="window.location.href='add_anime.html'">+ Thêm Anime</button>
+
+  <div class="anime-list" id="animeList"></div>
+  <div class="error-message" id="errorMessage"></div>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>

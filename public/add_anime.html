@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Thêm Anime Mới</title>
+  <style>
+    body {
+      background-color: #0d1117;
+      color: #ffffff;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #facc15;
+    }
+
+    form {
+      max-width: 600px;
+      margin-top: 20px;
+      background: #161b22;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: none;
+      background: #0d1117;
+      color: white;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #facc15;
+      border: none;
+      border-radius: 8px;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .message {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    .message.success {
+      color: #4ade80;
+    }
+
+    .message.error {
+      color: #f87171;
+    }
+  </style>
+</head>
+<body>
+  <h1>Thêm Anime Mới</h1>
+
+  <form id="animeForm">
+    <label>Tiêu đề</label>
+    <input type="text" name="tieu_de" required>
+
+    <label>Thể loại</label>
+    <input type="text" name="the_loai" required>
+
+    <label>Điểm trung bình</label>
+    <input type="number" name="diem_trung_binh" step="0.1" required>
+
+    <label>Link ảnh bìa</label>
+    <input type="text" name="anh_bia" required>
+
+    <label>Mô tả</label>
+    <textarea name="mo_ta" rows="4"></textarea>
+
+    <button type="submit">Thêm Anime</button>
+
+    <div id="message" class="message"></div>
+  </form>
+
+  <script>
+    document.getElementById('animeForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(this);
+      fetch('/api/anime/add_a.php', {
+        method: 'POST',
+        body: formData
+      })
+        .then(res => res.json())
+        .then(data => {
+          const msg = document.getElementById('message');
+          if (data.success) {
+            msg.textContent = 'Thêm anime thành công!';
+            msg.className = 'message success';
+            this.reset();
+          } else {
+            msg.textContent = data.message || 'Đã xảy ra lỗi khi thêm anime.';
+            msg.className = 'message error';
+          }
+        })
+        .catch(err => {
+          const msg = document.getElementById('message');
+          msg.textContent = 'Lỗi máy chủ: ' + err.message;
+          msg.className = 'message error';
+        });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+.edit-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #1e1e2f;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.3);
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.edit-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #f7d794;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.edit-form label {
+  font-weight: bold;
+}
+
+.edit-form input[type="text"],
+.edit-form input[type="number"],
+.edit-form textarea {
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  background: #2c2c3c;
+  color: #fff;
+  outline: none;
+}
+
+.edit-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.edit-form button {
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  background-color: #4cd137;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.edit-form button:hover {
+  background-color: #44bd32;
+}
+
+.edit-form .error {
+  color: #ff6b6b;
+  font-size: 14px;
+}
+
+.edit-form .success {
+  color: #7bed9f;
+  font-size: 14px;
+}
