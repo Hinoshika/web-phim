@@ -36,7 +36,7 @@ $stmt->bind_result($total);
 $stmt->fetch();
 $stmt->close();
 
-// Lấy dữ liệu với LIMIT OFFSET
+
 $sqlData = "SELECT * FROM anime $where ORDER BY id DESC LIMIT ? OFFSET ?";
 $stmt = $conn->prepare($sqlData);
 
@@ -46,7 +46,7 @@ $typesWithLimit = $types . 'ii';
 $paramsWithLimit[] = $limit;
 $paramsWithLimit[] = $offset;
 
-// bind_param cần truyền biến theo tham chiếu, nên dùng thủ thuật dưới:
+
 $stmt->bind_param($typesWithLimit, ...$paramsWithLimit);
 
 $stmt->execute();
@@ -54,7 +54,7 @@ $result = $stmt->get_result();
 
 $data = [];
 while ($row = $result->fetch_assoc()) {
-  // Kiểm tra tồn tại và khác null trước khi json_decode
+
   if (isset($row['genres']) && $row['genres'] !== null) {
     $row['genres'] = json_decode($row['genres'], true);
   } else {
@@ -64,7 +64,7 @@ while ($row = $result->fetch_assoc()) {
 }
 $stmt->close();
 
-// Trả về JSON
+
 echo json_encode([
   'total' => (int)$total,
   'items' => $data
