@@ -40,7 +40,7 @@ $stmt->close();
 $sqlData = "SELECT * FROM anime $where ORDER BY id DESC LIMIT ? OFFSET ?";
 $stmt = $conn->prepare($sqlData);
 
-// bind thêm 2 số int cho limit và offset
+
 $paramsWithLimit = $params;
 $typesWithLimit = $types . 'ii';
 $paramsWithLimit[] = $limit;
